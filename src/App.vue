@@ -1,6 +1,6 @@
 <template>
 	<div class="container" style="height: 100vh;">
-		<div class="d-flex flex-column justify-space-between" >
+		<!-- <div class="d-flex flex-column justify-space-between" >
 			<div style="height:500px;">
 				<img style="width:100%; height:100%;" src="./spider/image/cloudNativeIq.svg" />
 			</div>
@@ -18,12 +18,12 @@
 				<v-divider vertical></v-divider>
 				<v-btn text>About</v-btn>
 			</v-row>
-		</div>
+		</div> -->
 
-		<!-- <spiderChart 
+		<spiderChart 
 			@changeCheckpointSave="saveToLocalStorage"
 			ref="mSpiderChart"
-		/> -->
+		/>
 	</div>
 </template>
 

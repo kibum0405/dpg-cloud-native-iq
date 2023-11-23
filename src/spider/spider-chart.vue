@@ -1,28 +1,28 @@
 <template>
 	<div class="container">
 	  <div class="checkpoints-container" style="height:100vh; overflow:auto;">
-		<div v-for="(perspective, index) in perspectives" :key="index" style="padding:16px">
-		  <h2>{{ perspective.name }}</h2>
-		  <div v-for="(level, levelIndex) in perspective.levels" :key="levelIndex">
-			<h3 style="margin-bottom:4px;">Level {{ levelIndex + 1 }} :{{ level.name }}</h3>
-			  <label style="background-color:yellow;" v-for="(checkpoint, checkpointIndex) in level.checkpoints" :key="checkpointIndex">
-			  <div style="display:flex;">
+		<div v-for="(perspective, index) in perspectives" :key="index" style="padding-right:16px;">
+		  <h2 style="margin: 30px 0 20px 0;">{{ perspective.name }}</h2>
+		  <div v-for="(level, levelIndex) in perspective.levels" :key="levelIndex" style="margin-top: 15px;">
+			<h3>Level {{ levelIndex + 1 }} :{{ level.name }}</h3>
+			  <label v-for="(checkpoint, checkpointIndex) in level.checkpoints" :key="checkpointIndex">
+			  <div style="display:flex; align-items: flex-start; margin: 10px 0 0 20px;">
 				<input type="checkbox" v-model="checkpoint.checked" @change="updateLevelCompletion(perspective, level)">
-				<div>{{ checkpoint.text }}</div>
+				<div style="margin: -5px 0 0 5px;">{{ checkpoint.text }}</div>
 			  </div>
 			</label>
 		  </div>
 		</div>
   
-		<div style="padding:0px 16px 10px 16px;">
+		<div style="padding:16px;">
 		  <h2 style="margin-bottom:4px;">Result</h2>
 		  <div v-if="isAllLevelsCompleted">All levels are completed!</div>
 		  <div v-else>Some levels are not completed.</div>
 		</div>
 	  </div>
   
-	  <div class="chart-container" style="background-color:red">
-		<svg :width="chartWidth" :height="chartHeight" style="background-color:yellow; margin-top:20px;">
+	  <div class="chart-container">
+		<svg :width="chartWidth" :height="chartHeight">
 		  <g :transform="`translate(${chartCenterX}, ${chartCenterY})`">
 			<!-- Draw axes -->
 			<g v-for="(axis, index) in chartData.labels" :key="index">
@@ -92,7 +92,6 @@
 			levels: [
 			  {
 				checkpoints: [
-					{ name: '기능과 유즈케이스 단위로 분리'},
 				  { text: '비즈니스 역량 도출: 비즈니스 도메인을 분석하여 주요 기능과 유즈케이스를 도출하였는가?', checked: false },
 				  { text: '기능 정의: 각 기능을 명확하게 정의하고 해당 기능의 범위를 결정하였는가?', checked: false },
 				  { text: '유즈케이스 식별: 각 기능에 대한 유즈케이스를 식별하고 이를 단위로 분리하였는가?', checked: false },
@@ -166,6 +165,117 @@
 			  },
 			],
 		  },
+		  {
+			name: '소프트웨어 아키텍처 관점 체크포인트',
+			levels: [
+			  {
+				checkpoints: [
+				  { text: 'UI/UX: Server Side Rendering (SSR): 클라이언트 요청 시 서버에서 페이지를 완전히 렌더링하여 전송하는 방식을 사용합니다. 이를 통해 초기 로딩 속도를 개선하고 SEO에 더 유리한 환경을 제공할 수 있습니다.', checked: false },
+				  { text: 'Session-based 보안: 세션을 사용하여 사용자 인증 및 권한 부여를 처리합니다. 세션은 서버에 저장되어 클라이언트와의 상태를 유지하고 보안을 강화합니다.', checked: false },
+				  { text: '단일 언어(예: Spring Framework): 특정 언어 또는 프레임워크에 의존하여 애플리케이션을 개발합니다. 예를 들어, Spring Framework를 사용하여 모노리틱 서비스를 구축하고 운영합니다.', checked: false },
+				],
+				isCompleted: false,
+			  },
+			  {
+				checkpoints: [
+				  { text: 'UI/UX: Server Side Rendering (SSR): Level 1과 동일하게 서버에서 페이지를 렌더링하여 전송합니다.', checked: false },
+				  { text: 'Session Cluster 적용: 세션 클러스터링을 통해 여러 서버 간에 세션 정보를 공유하여 확장성과 가용성을 개선합니다.', checked: false },
+				  { text: 'MSA 지향 언어(예: Spring Boot): 마이크로서비스 아키텍처에 적합한 언어 또는 프레임워크를 선택하여 개발합니다. Spring Boot와 같은 경량화된 프레임워크를 사용하여 서비스를 독립적으로 구축하고 배포합니다.', checked: false },
+				],
+				isCompleted: false,
+			  },
+			  {
+				checkpoints: [
+				  { text: 'UI/UX: Client Side Rendering (CSR): 클라이언트에서 페이지 렌더링을 수행하고 필요한 데이터만 서버로부터 요청하여 가져옵니다. 이를 통해 초기 로딩 시간을 줄이고 사용자 경험을 향상시킬 수 있습니다.', checked: false },
+				  { text: 'Token-based 보안, OAuth2: 세션 대신 토큰을 사용하여 사용자 인증과 권한 부여를 처리합니다. OAuth2와 같은 표준 프로토콜을 사용하여 안전한 인증 및 인가를 구현합니다.', checked: false },
+				  { text: '폴리글랏 언어: 다양한 언어를 선택하여 각 마이크로서비스에 가장 적합한 언어를 사용합니다. 이를 통해 개발자들은 자신이 가장 잘 알고 있는 언어로 서비스를 개발할 수 있으며, 시스템 전체의 다양성과 유연성을 높일 수 있습니다.', checked: false },
+				],
+				isCompleted: false,
+			  },
+			  {
+				checkpoints: [
+				  { text: 'UI/UX: Client Side Rendering (CSR) + MVVM: 클라이언트에서 페이지 렌더링 및 상태 관리를 담당하는 MVVM(Model-View-ViewModel) 아키텍처를 사용합니다. 이를 통해 사용자 경험을 향상시키고 복잡한 상태 관리를 용이하게 합니다.', checked: false },
+				  { text: 'Token-based 보안, OAuth2: Level 3과 동일하게 토큰 기반의 보안 메커니즘을 사용합니다.', checked: false },
+				  { text: '폴리글랏 언어 + Service Mesh: 다양한 언어를 사용하며, 마이크로서비스 간 통신과 네트워크 기능을 관리하기 위해 Service Mesh를 도입합니다. Service Mesh는 서비스 간의 통신, 로드 밸런싱, 모니터링 등을 추상화하여 관리합니다. 이를 통해 시스템의 확장성과 안정성을 향상시킬 수 있습니다.', checked: false },
+				],
+				isCompleted: false,
+			  },
+			],
+		  },
+		  {
+			name: '인프라 아키텍처 관점 체크포인트',
+			levels: [
+			  {
+				checkpoints: [
+				  { text: '지속적인 빌드와 지속적인 통합 운영을 수행하고 있는가?', checked: false },
+				  { text: '개발 및 운영 사이의 원활한 협업을 위한 도구와 프로세스를 도입하였는가?', checked: false },
+				],
+				isCompleted: false,
+			  },
+			  {
+				checkpoints: [
+				  { text: '지속적인 딜리버리와 배포를 수행하고 있는가?', checked: false },
+				  { text: '로그를 중앙 집중화하여 모니터링과 분석을 용이하게 하였는가?', checked: false },
+				],
+				isCompleted: false,
+			  },
+			  {
+				checkpoints: [
+				  { text: '컨테이너 사용 (도커)을 적용하였는가?', checked: false },
+				  { text: '컨테이너 오케스트레이터 (Kubernetes)를 사용하여 마이크로서비스를 관리하고 스케일링하였는가?', checked: false },
+				  { text: '외부 구성 요소 (예: 유레카, 주키퍼)를 활용하여 마이크로서비스 간의 통신과 구성 관리를 개선했는가?', checked: false },
+				],
+				isCompleted: false,
+			  },
+			  {
+				checkpoints: [
+				  { text: '자동 프로비저닝을 갖춘 PaaS(Pass-as-a-Service) 기반 솔루션을 사용하였는가?', checked: false },
+				  { text: '인프라 자원의 프로비저닝, 확장 및 관리를 자동화하고 스케일링 용이성을 향상시켰는가?', checked: false },
+				  { text: 'PaaS를 통해 개발팀은 인프라 구성과 관리에 대해 걱정하지 않고 비즈니스 로직에 집중할 수 있는 환경을 제공받았는가?', checked: false },
+				],
+				isCompleted: false,
+			  },
+			],
+		  },
+		  {
+			name: '배포 관점 체크포인트',
+			levels: [
+			  {
+				checkpoints: [
+				  { text: '설치 스크립트 구동 및 호스트 당 멀티 서비스 인스턴스를 적용하였는가?', checked: false },
+				  { text: '설치 스크립트: 서비스 인스턴스를 설치하고 구성하기 위한 자동화된 스크립트를 사용하였는가?', checked: false },
+				  { text: '호스트 당 멀티 서비스 인스턴스: 단일 호스트에서 여러 개의 서비스 인스턴스를 실행하여 확장성을 향상시켰는가?', checked: false },
+				],
+				isCompleted: false,
+			  },
+			  {
+				checkpoints: [
+				  { text: 'VM 당 하나의 서비스 인스턴스, 클라이언트 사이드 로드 밸런싱, 서버 사이드 로드 밸런싱을 적용하였는가?', checked: false },
+				  { text: 'VM 당 하나의 서비스 인스턴스: 가상 머신(VM) 당 하나의 서비스 인스턴스를 실행하여 격리와 확장성을 개선했는가?', checked: false },
+				  { text: '클라이언트 사이드 로드 밸런싱: 클라이언트 측에서 요청을 여러 서비스 인스턴스로 분산시키는 로드 밸런싱을 구현하였는가?', checked: false },
+				  { text: '서버 사이드 로드 밸런싱: 로드 밸런서를 사용하여 서비스 인스턴스 간에 요청을 분산시키는 로드 밸런싱을 구현하였는가?', checked: false },
+				],
+				isCompleted: false,
+			  },
+			  {
+				checkpoints: [
+				  { text: 'Immutable 서버, 컨테이너 당 하나의 서비스 인스턴스, blue/green 배포를 포함한 다양한 배포 전략을 구사하였는가?', checked: false },
+				  { text: 'Immutable 서버: 변경 불가능한 서버 이미지를 사용하여 배포와 롤백의 안정성과 일관성을 확보하였는가?', checked: false },
+				  { text: '컨테이너 당 하나의 서비스 인스턴스: 컨테이너 당 하나의 서비스 인스턴스를 실행하여 격리와 확장성을 개선했는가?', checked: false },
+				  { text: 'Blue/Green 배포: 새로운 버전의 서비스를 기존 버전과 동시에 배포하고 트래픽을 전환하는 Blue/Green 배포 전략을 구현하였는가?', checked: false },
+				],
+				isCompleted: false,
+			  },
+			  {
+				checkpoints: [
+				  { text: '멀티 클라우드 및 멀티 데이터 센터 지원을 포함한 배포 관점의 성숙도를 갖췄는가?', checked: false },
+				  { text: '멀티 클라우드: 여러 클라우드 제공업체를 사용하여 애플리케이션을 배포 및 실행하는 환경을 구축하였는가?', checked: false },
+				  { text: '멀티 데이터 센터: 여러 데이터 센터에 애플리케이션을 분산 배포하여 가용성과 복원력을 향상시켰는가?', checked: false },
+				],
+				isCompleted: false,
+			  },
+			],
+		  },
 		  // Add more perspectives here if needed
 		],
   
@@ -225,14 +335,15 @@
   .container {
 	display: flex;
 	justify-content: space-between;
+	align-items: center;
   }
   
   .checkpoints-container {
-	flex: 1;
+	flex: 1.5;
   }
   
   .chart-container {
-	flex: 1;
+	flex: 0.5;
   }
   svg {
 	display: block;

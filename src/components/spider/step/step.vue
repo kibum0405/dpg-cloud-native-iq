@@ -22,16 +22,16 @@
                 </template>
             </v-stepper-header>
   
-            <v-stepper-items>
+            <v-stepper-items class="step-box">
                 <v-stepper-content
                     v-for="n in components.length"
                     :key="`${n}-content`"
                     :step="n"
                 >
-                    <v-card class="mb-12">
+                    <v-card class="mb-12"> <!-- step-box 안의 흰 박스 -->
                         <component :is="components[n - 1].component" />
                     </v-card>
-                    <div>
+                    <div style="text-align: right;">
                         <v-btn color="primary" @click="nextStep(n)">Next</v-btn>
                         <v-btn text>Cancel</v-btn>
                     </div>
@@ -72,3 +72,27 @@ export default {
     },
 }
 </script>
+
+<style>
+/* .step-box {
+    background-color: lightgoldenrodyellow;
+} */
+.qna-box {
+    width: 130%;
+	height: 100vh;
+	overflow: auto;
+    padding-right: 20px;
+	/* border: 1px solid pink; */
+}
+
+@media only screen and (max-width:1100px) {
+  .qna-box {
+    width: 100%;
+  }
+}
+@media only screen and (max-width:700px) {
+  .qna-box {
+    height: 50vh;
+  }
+}
+</style>

@@ -1,6 +1,6 @@
 <template>
     <div>
-      <v-stepper v-model="e1">
+        <v-stepper v-model="e1">
             <v-stepper-header>
                 <template v-for="n in components.length">
                     <v-stepper-step
@@ -35,7 +35,7 @@
             </v-stepper-items>
         </v-stepper>
     </div>
-  </template>
+</template>
 
 <script>
 import Assessment from './Assessment';
@@ -43,24 +43,24 @@ import GoalSetting from './GoalSetting';
 import GetTheGuide from './GetTheGuide';
 
 export default {
-  data () {
+    data () {
         return {
             e1: 1,
             components: [Assessment, GoalSetting, GetTheGuide],
         }
-  },
-
-  watch: {
-  },
-
-  methods: {
-    nextStep (n) {
-      if (n === this.components.length) {
-        this.e1 = 1
-      } else {
-        this.e1 = n + 1
-      }
     },
-  },
+
+    watch: {
+    },
+
+    methods: {
+        nextStep (n) {
+            if (n === this.components.length) {
+                this.e1 = 1
+            } else {
+                this.e1 = n + 1
+            }
+        },
+    },
 }
 </script>

@@ -31,9 +31,10 @@
                     <v-card class="mb-12">
                         <component :is="components[n - 1].component" />
                     </v-card>
-
-                    <v-btn color="primary" @click="nextStep(n)">Next</v-btn>
-                    <v-btn text>Cancel</v-btn>
+                    <div>
+                        <v-btn color="primary" @click="nextStep(n)">Next</v-btn>
+                        <v-btn text>Cancel</v-btn>
+                    </div>
                 </v-stepper-content>
             </v-stepper-items>
         </v-stepper>

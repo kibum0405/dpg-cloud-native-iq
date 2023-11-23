@@ -1,71 +1,61 @@
 <template>
     <div>
       <v-stepper v-model="e1">
-        <v-stepper-header>
-          <template v-for="n in steps">
-            <v-stepper-step
-              :key="`${n}-step`"
-              :complete="e1 > n"
-              :step="n"
-              editable
-            >
-              Step {{ n }}
-            </v-stepper-step>
+            <v-stepper-header>
+                <template v-for="n in components.length">
+                    <v-stepper-step
+                        :key="`${n}-step`"
+                        :complete="e1 > n"
+                        :step="n"
+                        editable
+                    >
+                        Step {{ n }}
+                    </v-stepper-step>
+        
+                    <v-divider
+                        v-if="n !== components.length"
+                        :key="n"
+                    ></v-divider>
+                </template>
+            </v-stepper-header>
   
-            <v-divider
-              v-if="n !== steps"
-              :key="n"
-            ></v-divider>
-          </template>
-        </v-stepper-header>
-  
-        <v-stepper-items>
-          <v-stepper-content
-            v-for="n in steps"
-            :key="`${n}-content`"
-            :step="n"
-          >
-            <v-card
-              class="mb-12"
-              height="200px"
-            >123</v-card>
-  
-            <v-btn
-              color="primary"
-              @click="nextStep(n)"
-            >
-              Next
-            </v-btn>
-  
-            <v-btn text>
-              Cancel
-            </v-btn>
-          </v-stepper-content>
-        </v-stepper-items>
-      </v-stepper>
+            <v-stepper-items>
+                <v-stepper-content
+                    v-for="n in components.length"
+                    :key="`${n}-content`"
+                    :step="n"
+                >
+                    <v-card class="mb-12">
+                        <component :is="components[n - 1]" />
+                    </v-card>
+
+                    <v-btn color="primary" @click="nextStep(n)">Next</v-btn>
+                    <v-btn text>Cancel</v-btn>
+                </v-stepper-content>
+            </v-stepper-items>
+        </v-stepper>
     </div>
   </template>
 
 <script>
+import Assessment from './Assessment';
+import GoalSetting from './GoalSetting';
+import GetTheGuide from './GetTheGuide';
+
 export default {
   data () {
-    return {
-      e1: 1,
-      steps: 3,
-    }
+        return {
+            e1: 1,
+            components: [Assessment, GoalSetting, GetTheGuide],
+        }
   },
 
   watch: {
-    steps (val) {
-      if (this.e1 > val) {
-        this.e1 = val
-      }
-    },
   },
 
   methods: {
     nextStep (n) {
-      if (n === this.steps) {
+      if (n === this.components.length) {
         this.e1 = 1
       } else {
         this.e1 = n + 1

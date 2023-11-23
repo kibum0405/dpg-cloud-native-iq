@@ -14,7 +14,7 @@
 				</v-col>
 			</v-row>
 			<div class="flex-grow-1"></div> 
-			<v-row class="align-center justify-center" style="height:36px;">
+			<v-row class="align-left justify-left" style="height:36px;">
 				<v-btn text>전환가이드 전체 보기</v-btn>
 				<v-divider vertical class="mx-2"></v-divider> 
 				<v-btn text>About</v-btn>

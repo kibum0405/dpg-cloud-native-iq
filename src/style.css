@@ -25,6 +25,16 @@ svg {
     box-sizing: border-box;
 }
 
-.checkpoints-container {
-    overflow: auto; height:100vh;
+.container {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.chart-container {
+	flex: 0.5;
+}
+svg {
+	display: block;
+	margin: auto;
 }

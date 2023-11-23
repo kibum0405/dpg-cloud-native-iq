@@ -1,97 +1,63 @@
 <template>
-	<div class="container">
-  
-	  <div class="checkpoints-container">
-	  <div v-for="(perspective, index) in perspectives" :key="index">
-		<h2>{{ perspective.name }}</h2>
-		<div v-for="(level, levelIndex) in perspective.levels" :key="levelIndex">
-		  <h3>Level {{ levelIndex + 1 }}</h3>
-		  <div>
-			<label v-for="(checkpoint, checkpointIndex) in level.checkpoints" :key="checkpointIndex">
-			  <input type="checkbox" v-model="checkpoint.checked" @change="updateLevelCompletion(perspective, level)">
-				<span style="color: black">{{ checkpoint.text }}</span>
-			</label>
-		  </div>
-		</div>
-	  </div>
-  
-	  <div>
-		<h2>Result</h2>
-		<p v-if="isAllLevelsCompleted">All levels are completed!</p>
-		<p v-else>Some levels are not completed.</p>
-	  </div>
-  
-	</div>
-  
-	<div class="chart-container">
-	  <svg :width="chartWidth" :height="chartHeight">
-		<g :transform="`translate(${chartCenterX}, ${chartCenterY})`">
-		  <!-- Draw axes -->
-		  <g v-for="(axis, index) in chartData.labels" :key="index">
-			<line
-			  :x1="0"
-			  :y1="0"
-			  :x2="getCoordinate(chartRadius, index, chartData.labels.length)[0]"
-			  :y2="getCoordinate(chartRadius, index, chartData.labels.length)[1]"
-			  stroke="lightgray"
-			/>
-			<text
-			  :x="getCoordinate(chartRadius + labelOffset, index, chartData.labels.length)[0]"
-			  :y="getCoordinate(chartRadius + labelOffset, index, chartData.labels.length)[1]"
-			  dominant-baseline="middle"
-			  text-anchor="middle"
-			>
-			  {{ axis }}
-			</text>
-		  </g>
-  
-		  <!-- Draw data points -->
-		  <g>
-			<polygon
-			  :points="getPolygonPoints(chartData.data)"
-			  fill="rgba(75, 192, 192, 0.2)"
-			  stroke="rgba(75, 192, 192, 1)"
-			/>
-			<polygon
-			  :points="getPolygonPoints(chartData.data2)"
-			  fill="rgba(192, 75, 192, 0.2)"
-			  stroke="rgba(192, 75, 192, 1)"
-			/>
-			<circle
-			  v-for="(dataPoint, index) in chartData.data"
-			  :key="index"
-			  :cx="getCoordinate(chartRadius * (dataPoint / maxDataValue), index, chartData.data.length)[0]"
-			  :cy="getCoordinate(chartRadius * (dataPoint / maxDataValue), index, chartData.data.length)[1]"
-			  :r="pointRadius"
-			  fill="rgba(75, 192, 192, 1)"
-			/>
-			<circle
-			  v-for="(dataPoint, index) in chartData.data2"
-			  :key="index"
-			  :cx="getCoordinate(chartRadius * (dataPoint / maxDataValue), index, chartData.data2.length)[0]"
-			  :cy="getCoordinate(chartRadius * (dataPoint / maxDataValue), index, chartData.data2.length)[1]"
-			  :r="pointRadius"
-			  fill="rgba(192, 75, 192, 1)"
-			/>
-		  </g>
-		</g>
-	  </svg>
-	</div>
-  
+	<div>
+		<v-row>
+			<v-col>
+				<div>
+					<div v-for="(perspective, index) in perspectives" :key="index">
+						<h2>{{ perspective.name }}</h2>
+						<div v-for="(level, levelIndex) in perspective.levels" :key="levelIndex">
+							<h3>Level {{ levelIndex + 1 }}</h3>
+							<div>
+								<label v-for="(checkpoint, checkpointIndex) in level.checkpoints" :key="checkpointIndex">
+									<div>
+										<input type="checkbox" v-model="checkpoint.checked" @change="updateLevelCompletion(perspective, level)">
+										<span style="color: black">{{ checkpoint.text }}</span>
+									</div>
+								</label>
+							</div>
+						</div>
+					</div>
+				
+					<div>
+						<h2>Result</h2>
+						<p v-if="isAllLevelsCompleted">All levels are completed!</p>
+						<p v-else>Some levels are not completed.</p>
+					</div>
+				</div>
+			</v-col>
+			<v-col>
+				<SpiderChart
+					:perspectives="perspectives"
+					:chartWidth="chartWidth"
+					:chartHeight="chartHeight"
+					:chartCenterX="chartCenterX"
+					:chartCenterY="chartCenterY"
+					:chartRadius="chartRadius"
+					:labelOffset="labelOffset"
+					:maxDataValue="maxDataValue"
+					:pointRadius="pointRadius"
+				/>
+			</v-col>
+		</v-row>
 	</div>
 </template>
   
-  <script>
-  
-  
-  export default {
-  
+<script>
+import SpiderChart from './SpiderChart.vue'
+
+export default {
+    components: {
+        SpiderChart,
+    },
+    props: {
+
+    },
 	data() {
-		return {
-			isAllLevelsCompleted: false,
+        return {
+            isAllLevelsCompleted: false,
 			perspectives: [
 				{
-					name: '기능분해관점 체크포인트',
+					name: '기능분해관점',
 					levels: [
 						{
 							checkpoints: [
@@ -133,7 +99,7 @@
 					],
 				},
 				{
-					name: '데이터 관점 체크포인트',
+					name: '데이터 관점',
 					levels: [
 						{
 							checkpoints: [
@@ -169,7 +135,7 @@
 					],
 				},
 				{
-					name: '소프트웨어 아키텍처 관점 체크포인트',
+					name: '소프트웨어 아키텍처 관점',
 					levels: [
 						{
 							checkpoints: [
@@ -206,7 +172,7 @@
 					],
 				},
 				{
-					name: '인프라 아키텍처 관점 체크포인트',
+					name: '인프라 아키텍처 관점',
 					levels: [
 						{
 							checkpoints: [
@@ -241,7 +207,7 @@
 					],
 				},
 				{
-					name: '배포 관점 체크포인트',
+					name: '배포 관점',
 					levels: [
 						{
 							checkpoints: [
@@ -280,12 +246,6 @@
 					],
 				},
 			],
-	
-			chartData: {
-				labels: ['기능분해', '데이터', 'SW 아키텍처', 'Infra', '스트럭처', '배포', '팀구조'],
-				data: [0, 0, 0, 0, 0, 0, 0],
-				data2: [0, 0, 0, 0, 0, 0, 0],
-			},
 			chartWidth: 400,
 			chartHeight: 400,
 			chartCenterX: 200,
@@ -294,62 +254,35 @@
 			labelOffset: 20,
 			maxDataValue: 5,
 			pointRadius: 4,
-		};
+        }
 	},
+	mounted() {
+		this.getPerspectives();
+	},
+	watch: {
+        perspectives: {
+            handler(newVal) {
+                localStorage.setItem('perspectives', JSON.stringify(newVal));
+            },
+            deep: true
+        }
+    },
 	methods: {
-		getCoordinate(radius, index, total) {
-			const angle = (Math.PI * 2 * index) / total - Math.PI / 2;
-			const x = radius * Math.cos(angle);
-			const y = radius * Math.sin(angle);
-			return [x, y];
-		},
-		getPolygonPoints(data) {
-			return data
-			.map((dataPoint, index) => {
-				const radius = this.chartRadius * (dataPoint / this.maxDataValue);
-				return this.getCoordinate(radius, index, data.length).join(',');
-			})
-			.join(' ');
-		},
+		getPerspectives() {
+            const storedPerspectives = localStorage.getItem('perspectives');
+            if (storedPerspectives) {
+                this.perspectives = JSON.parse(storedPerspectives);
+            }
+        },
 		updateLevelCompletion(perspective, level) {
 			level.isCompleted = level.checkpoints.every(checkpoint => checkpoint.checked);
-			this.checkAllLevelsCompletion(perspective);
-		},
-		checkAllLevelsCompletion(perspective) {
-			perspective.isCompleted = perspective.levels.every((level) => level.isCompleted);
-		
-		//  if (perspective.isCompleted) {
-			const perspectiveIndex = this.chartData.labels.findIndex((label) => label === perspective.name);
-			if (perspectiveIndex !== -1) {
-				const lastCompletedLevelIndex = perspective.levels.findIndex((level) => !level.isCompleted) - 1;
-				const value = lastCompletedLevelIndex !== -1 ? lastCompletedLevelIndex + 1 : this.chartData.labels.length;
-				this.chartData.data[perspectiveIndex] = value;
-				this.chartData.data2[perspectiveIndex] = value;
-			}
-			//}
 		},
 	}
 };
 </script>
   
 <style>
-.container {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-}
-
-.checkpoints-container {
-	flex: 1.5;
-}
-
-.chart-container {
-	flex: 0.5;
-}
-svg {
-	display: block;
-	margin: auto;
-}
+  
 </style>
   
   

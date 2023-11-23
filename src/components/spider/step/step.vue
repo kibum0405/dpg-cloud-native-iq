@@ -9,7 +9,10 @@
                         :step="n"
                         editable
                     >
-                        Step {{ n }}
+                    <div>
+                        <div>Step {{ n }}</div>
+                        <div>{{ components[n - 1].name }}</div>
+                    </div>
                     </v-stepper-step>
         
                     <v-divider
@@ -26,7 +29,7 @@
                     :step="n"
                 >
                     <v-card class="mb-12">
-                        <component :is="components[n - 1]" />
+                        <component :is="components[n - 1].component" />
                     </v-card>
 
                     <v-btn color="primary" @click="nextStep(n)">Next</v-btn>
@@ -46,7 +49,11 @@ export default {
     data () {
         return {
             e1: 1,
-            components: [Assessment, GoalSetting, GetTheGuide],
+            components: [
+                { component: Assessment, name: '현수준평가' },
+                { component: GoalSetting, name: '목표수준설정' },
+                { component: GetTheGuide, name: '전환가이드' }
+            ],
         }
     },
 

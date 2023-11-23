@@ -1,8 +1,8 @@
 // router/index.js
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import main from '../spider/main.vue';
-import step from '../spider/step/step.vue'
+import main from '../components/main.vue';
+import step from '../components/spider/step/step.vue'
 
 Vue.use(VueRouter);
 

@@ -88,11 +88,15 @@ export default {
     },
     created() {
         this.loadPerspectives();
+        this.$bus.$on('perspectivesUpdated', this.updatePerspectives);
     },
     watch: {
     },
 
     methods: {
+        updatePerspectives(newPerspectives) {
+            this.perspectives = newPerspectives;
+        },
         loadPerspectives() {
             const storedPerspectives = localStorage.getItem('perspectives');
             if (storedPerspectives) {

@@ -261,11 +261,12 @@ export default {
 	},
 	watch: {
         perspectives: {
-            handler(newVal) {
-                localStorage.setItem('perspectives', JSON.stringify(newVal));
-            },
-            deep: true
-        }
+			handler(newVal) {
+				localStorage.setItem('perspectives', JSON.stringify(newVal));
+				this.$bus.$emit('perspectivesUpdated', newVal);
+			},
+			deep: true
+		}
     },
 	methods: {
 		getPerspectives() {

@@ -45,7 +45,7 @@
   
 <script>
 import SpiderChart from './SpiderChart.vue'
-import AssessmentData from '@/components/spider/step/AssessmentData'
+import AssessmentData from './AssessmentData.js'
 
 export default {
 	mixins: [

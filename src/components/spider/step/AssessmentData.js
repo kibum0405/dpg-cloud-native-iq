@@ -4,7 +4,8 @@ export default {
             isAllLevelsCompleted: false,
 			perspectives: [
 				{
-					name: '기능분해 관점',
+					name: '기능분해관점',
+					goalLevel: 0,
 					levels: [
 						{
 							checkpoints: [
@@ -47,6 +48,7 @@ export default {
 				},
 				{
 					name: '데이터 관점',
+					goalLevel: 0,
 					levels: [
 						{
 							checkpoints: [
@@ -83,6 +85,7 @@ export default {
 				},
 				{
 					name: '소프트웨어 아키텍처 관점',
+					goalLevel: 0,
 					levels: [
 						{
 							checkpoints: [
@@ -120,6 +123,7 @@ export default {
 				},
 				{
 					name: '인프라 아키텍처 관점',
+					goalLevel: 0,
 					levels: [
 						{
 							checkpoints: [
@@ -155,6 +159,7 @@ export default {
 				},
 				{
 					name: '배포 관점',
+					goalLevel: 0,
 					levels: [
 						{
 							checkpoints: [

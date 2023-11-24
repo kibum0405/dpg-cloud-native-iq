@@ -8,7 +8,7 @@
 				/>
 			</v-app-bar>
 			<v-main style="padding:20px; height: calc(100vh - 60px);">
-				<router-view></router-view>
+				<router-view style="height:calc(100vh - 100px);"></router-view>
 			</v-main>
 		</div>
 	</v-app>

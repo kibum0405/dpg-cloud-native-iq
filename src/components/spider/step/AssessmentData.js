@@ -4,7 +4,7 @@ export default {
             isAllLevelsCompleted: false,
 			perspectives: [
 				{
-					name: '기능분해관점',
+					name: '기능분해 관점',
 					levels: [
 						{
 							checkpoints: [
@@ -187,6 +187,44 @@ export default {
 								{ text: '멀티 클라우드 및 멀티 데이터 센터 지원을 포함한 배포 관점의 성숙도를 갖췄는가?', checked: false },
 								{ text: '멀티 클라우드: 여러 클라우드 제공업체를 사용하여 애플리케이션을 배포 및 실행하는 환경을 구축하였는가?', checked: false },
 								{ text: '멀티 데이터 센터: 여러 데이터 센터에 애플리케이션을 분산 배포하여 가용성과 복원력을 향상시켰는가?', checked: false },
+							],
+							isCompleted: false,
+						},
+					],
+				},
+				{
+					name: '팀 구조와 문화 관점',
+					levels: [
+						{
+							checkpoints: [
+								{ text: '개발, QA, 릴리즈, 운영이 분리된 하나의 기능 팀을 적용하였는가?', checked: false },
+								{ text: '개발, QA, 릴리즈, 운영이 분리된 하나의 기능 팀: 기능별로 분리된 팀이 각자의 역할에 집중하여 작업하고, 개발부터 운영까지 전체 생명주기를 담당하였는가?', checked: false },
+							],
+							isCompleted: false,
+						},
+						{
+							checkpoints: [
+								{ text: '공유된 서비스 모델로 팀 공동 작업, 내부 소스 공개를 적용하였는가?', checked: false },
+								{ text: '공유된 서비스 모델: 여러 팀이 공통적으로 사용하는 서비스 모델을 개발하고 유지보수하여 효율성을 향상시켰는가?', checked: false },
+								{ text: '팀 공동 작업: 여러 팀이 협업하여 기능을 개발하고 통합하는 작업을 수행하였는가?', checked: false },
+								{ text: '내부 소스 공개: 팀 내에서 개발된 소스 코드와 지식을 공유하고 문서화하여 효율적인 협업을 도모하였는가?', checked: false },
+							],
+							isCompleted: false,
+						},
+						{
+							checkpoints: [
+								{ text: '서비스별 프로덕트 팀(PO, UI/UX 디자이너, 개발자) Cross Functional한 플랫폼 팀을 적용하였는가?', checked: false },
+								{ text: '서비스별 프로덕트 팀: 각 서비스에 대한 전체적인 책임을 갖는 프로덕트 팀을 구성하였는가?', checked: false },
+								{ text: 'PO, UI/UX 디자이너, 개발자: 다양한 역할을 수행하는 멤버들로 구성되어 프로덕트를 개발하고 개선하는데 참여하였는가?', checked: false },
+								{ text: 'Cross Functional한 플랫폼 팀: 다양한 기술과 역할을 갖춘 팀이 플랫폼 관련 업무를 수행하고, 서비스 팀을 지원하였는가?', checked: false },
+							],
+							isCompleted: false,
+						},
+						{
+							checkpoints: [
+								{ text: '업무 기능별 혹은 도메인별 팀들이 모든 관점에서 책임을 수반하였으며, "네가 구축한 것은 네가 운영합니다"를 적용하였는가?', checked: false },
+								{ text: '업무 기능별 혹은 도메인별 팀: 특정 업무 기능이나 도메인을 담당하는 팀이 모든 측면에서 책임을 진다.', checked: false },
+								{ text: '"네가 구축한 것은 네가 운영합니다": 각 팀이 자체적으로 구축한 서비스나 기능을 직접 운영하고 유지보수하는 책임을 가지며, 자율성을 강조하였는가?', checked: false },
 							],
 							isCompleted: false,
 						},

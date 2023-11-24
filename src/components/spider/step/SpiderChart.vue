@@ -116,7 +116,7 @@ export default {
 <style>
 .spider-box {
 	/* background-color: lightblue; */
-	width:130%;
+	/* width:130%; */
 	/* margin-left: auto; */
 }
 
@@ -133,7 +133,8 @@ export default {
 }*/
 @media only screen and (max-width:700px) {
   .spider-box {
-    width:100%;
+    /* width:100%; */
+	/* overflow: auto; */
   }    
 } 
 </style>

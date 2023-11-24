@@ -1,16 +1,16 @@
 <template>
-	<div style="width:100%;height: 100%;">
+	<div>
 		<div class="flex-column">
 			<div style="text-align: center;">
 				<!-- <img style="width:800px; height:500px;" src="../image/DPG_logo.png" /> -->
-				<img style="height: calc(50vh - 36px);" src="../image/DPG_logo.png" />
+				<img class="main-logo" src="../image/DPG_logo.png" />
 			</div>
 			<v-row>
 				<v-col v-for="(step, index) in steps" :key="index">
-					<v-card @click="goToStep(step.path)" style="margin:40px 20px 20px 20px; padding:30px; text-align: center;">
+					<v-card @click="goToStep(step.path)" class="card-box">
 						<h2>Step. {{ index + 1 }}</h2>
-						<h1 style="margin-top:50px;">{{ step.name }}</h1>
-						<div style="font-size:20px; margin-top:20px;">{{ step.name_en }}</div>
+						<h1>{{ step.name }}</h1>
+						<div>{{ step.name_en }}</div>
 					</v-card>
 				</v-col>
 			</v-row>
@@ -63,5 +63,41 @@ export default {
 </script>
 
 <style>
+.main-logo {
+	height: calc(50vh - 36px);
+}
+.card-box {
+	margin:40px 20px 20px 20px; 
+	padding: 30px; 
+	text-align: center;
+}
+.card-box > h1 {
+	margin-top: 50px;
+}
+.card-box > div {
+	font-size:20px; 
+	margin-top:20px;
+}
+
+@media only screen and (max-width:1400px) {
+	.main-logo {
+		height: calc(50vh - 66px);
+	}
+	.card-box > h1 {
+		margin-top: 30px;;
+	}
+}
+@media only screen and (max-width:700px) {
+	.main-logo {
+    	width: 100%;
+		height: 100%;
+  	}
+	.card-box > h1 {
+		font-size: 26px;
+	}
+	.card-box > div {
+		font-size: 16px;
+	}
+} 
 </style>
 

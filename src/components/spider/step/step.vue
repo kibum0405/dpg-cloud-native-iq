@@ -1,6 +1,6 @@
 <template>
     <div>
-        <v-stepper v-model="e1">
+        <v-stepper v-model="e1" class="box-wrap">
             <v-stepper-header>
                 <template v-for="n in components.length">
                     <v-stepper-step
@@ -28,16 +28,17 @@
                     :key="`${n}-content`"
                     :step="n"
                 >
-                    <v-card class="mb-12"> <!-- step-box 안의 흰 박스 -->
+                    <v-card class="mb-12 stop-box-in">
                         <component :is="components[n - 1].component" />
                     </v-card>
-                    <div style="text-align: right;">
-                        <v-btn color="primary" @click="nextStep(n)">Next</v-btn>
-                        <v-btn text>Cancel</v-btn>
-                    </div>
+                    
                 </v-stepper-content>
             </v-stepper-items>
         </v-stepper>
+        <div class="btn-box">
+            <v-btn class="btn-1" color="primary" @click="nextStep(n)">Next</v-btn>
+            <v-btn class="btn-1" text>Cancel</v-btn>
+        </div>
     </div>
 </template>
 
@@ -74,25 +75,46 @@ export default {
 </script>
 
 <style>
-/* .step-box {
-    background-color: lightgoldenrodyellow;
-} */
+.box-wrap {
+    height:calc(100vh - 150px);
+    /* border:1px solid blue; */
+}
+.step-box {
+    /* overflow: auto; */
+    height:calc(100vh - 230px);
+    /* background-color: lightgoldenrodyellow; */
+}
+.stop-box-in { 
+    /* step-box 안의 흰 박스 */
+    height:calc(100vh - 280px);
+}
 .qna-box {
-    width: 130%;
-	height: 100vh;
+    /* width: 130%; */
+    height:calc(100vh - 280px);
 	overflow: auto;
-    padding-right: 20px;
+    padding: 20px;
 	/* border: 1px solid pink; */
+}
+.btn-box {
+    text-align: right;
+    margin-top:10px;
 }
 
 @media only screen and (max-width:1100px) {
-  .qna-box {
-    width: 100%;
-  }
+    .qna-box {
+        /* width: 100%; */
+    }
 }
 @media only screen and (max-width:700px) {
-  .qna-box {
-    height: 50vh;
-  }
+    .box-wrap, .step-box, .stop-box-in {
+        height:100%;
+    }
+    .qna-box {
+        height: 50vh;
+        padding: 0;
+    }
+    .btn-1 {
+        margin-bottom:10px;
+    }
 }
 </style>

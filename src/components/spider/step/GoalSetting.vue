@@ -4,7 +4,7 @@
             <v-col>
                 <div class="qna-box goal-box">
                     <div v-for="(topic, topicIndex) in topics" :key="topicIndex" style="margin-bottom: 40px;">
-                        <h3 style="margin-bottom: 20px;">{{ topic.name }}</h3>
+                        <h3 style="margin-bottom: 10px;">{{ topic.name }}</h3>
                         <div v-for="(question, questionIndex) in topic.questions" :key="questionIndex" style="margin-bottom: 10px;padding:10px 10px 0 0;border-bottom: 1px solid #ccc;">
                             <div>{{ question.text }}</div>
                             <v-slider

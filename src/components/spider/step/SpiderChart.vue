@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div class="spider-box">
 		<svg :width="chartWidth" :height="chartHeight">
 			<g :transform="`translate(${chartCenterX}, ${chartCenterY})`">
 				<g v-for="(perspective, index) in perspectives" :key="perspective.name">
@@ -114,7 +114,28 @@ export default {
 </script>
   
 <style>
+.spider-box {
+	/* background-color: lightblue; */
+	width:130%;
+	/* margin-left: auto; */
+}
 
+/* 
+@media only screen and (max-width:1100px) {
+  .spider-box {
+    width:100%;
+  }    
+}
+@media only screen and (max-width:900px) {
+  .spider-box {
+    width:100%;
+  }    
+}*/
+@media only screen and (max-width:700px) {
+  .spider-box {
+    width:100%;
+  }    
+} 
 </style>
   
   

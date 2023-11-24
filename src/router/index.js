@@ -2,26 +2,22 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import main from '../components/main.vue';
-import step from '../components/spider/step/step.vue'
+import Step from '../components/spider/step/Step.vue'
 
 Vue.use(VueRouter);
 
 const routes = [
-  {
-    path: '/',
-    name: 'main',
-    component: main,
-  },
-  {
-    path: '/step',
-    name: 'step',
-    component: step,
-  },
-//   {
-//     path: '/step2',
-//     name: 'step2',
-//     component: Step2,
-//   },
+    {
+        path: '/',
+        name: 'main',
+        component: main,
+    },
+    {
+        path: '/step/:stepName',
+        name: 'Step',
+        component: Step,
+        props: true 
+    },
 ];
 
 const router = new VueRouter({

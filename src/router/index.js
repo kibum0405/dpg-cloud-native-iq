@@ -7,17 +7,16 @@ import Step from '../components/spider/step/Step.vue'
 Vue.use(VueRouter);
 
 const routes = [
-    {
+  {
         path: '/',
         name: 'main',
         component: main,
-    },
-    {
-        path: '/step/:stepName',
+  },
+  {
+        path: '/step',
         name: 'Step',
         component: Step,
-        props: true 
-    },
+  },
 ];
 
 const router = new VueRouter({

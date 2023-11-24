@@ -7,7 +7,7 @@
 			</div>
 			<v-row>
 				<v-col v-for="(step, index) in steps" :key="index">
-					<v-card @click="goToStep(step.name_en)" style="margin:40px 20px 20px 20px; padding:30px; text-align: center;">
+					<v-card @click="goToStep(step.path)" style="margin:40px 20px 20px 20px; padding:30px; text-align: center;">
 						<h2>Step. {{ index + 1 }}</h2>
 						<h1 style="margin-top:50px;">{{ step.name }}</h1>
 						<div style="font-size:20px; margin-top:20px;">{{ step.name_en }}</div>
@@ -37,14 +37,17 @@ export default {
 				{
 					name: "현 수준 평가",
 					name_en: "Assessment",
+					path: "/step"
 				},
 				{
 					name: "목표수준 설정",
 					name_en: "Goal Setting",
+					path: "/step"
 				},
 				{
 					name: "전환 가이드",
 					name_en: "Get the Guide",
+					path: "/step"
 				}
 			]
 		}
@@ -52,9 +55,9 @@ export default {
 	mounted() {
 	},
 	methods: {
-		goToStep(stepName) {
-			this.$router.push({ path: `/step/${stepName}` });
-		}
+		goToStep(path) {
+			this.$router.push(path);
+		},
 	},
 };
 </script>

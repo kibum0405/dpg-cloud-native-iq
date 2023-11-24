@@ -2,7 +2,7 @@
 	<div class="spider-box">
 		<svg :width="chartWidth" :height="chartHeight">
 			<g :transform="`translate(${chartCenterX}, ${chartCenterY})`">
-				<g v-for="(perspective, index) in perspectives" :key="perspective.name">
+				<g v-for="(perspective, index) in perspectives" :key="`perspective-${index}₩`">
 					<line
 						:x1="0"
 						:y1="0"
@@ -25,14 +25,25 @@
 						fill="rgba(75, 192, 192, 0.2)"
 						stroke="rgba(75, 192, 192, 1)"
 					/>
-					<circle
-						v-for="(perspective, index) in perspectives"
-						:key="index"
-						:cx="getCoordinateForCircle(perspective, index)[0]"
-						:cy="getCoordinateForCircle(perspective, index)[1]"
-						:r="pointRadius"
-						fill="rgba(75, 192, 192, 1)"
+					<polygon
+						:points="getPolygonPointsGoal(perspectives)"
+						fill="rgba(192, 75, 192, 0.1)"
+            			stroke="rgba(192, 75, 192, 1)"
 					/>
+					<g v-for="(perspective, index) in perspectives">
+						<circle
+							:cx="getCoordinateForCircle(perspective, index)[0]"
+							:cy="getCoordinateForCircle(perspective, index)[1]"
+							:r="pointRadius"
+							fill="rgba(75, 192, 192, 1)"
+						/>
+						<circle
+							:cx="getCoordinateForCircleGoal(perspective, index)[0]"
+							:cy="getCoordinateForCircleGoal(perspective, index)[1]"
+							:r="pointRadius"
+							fill="rgba(192, 75, 192, 0.5)"
+						/>
+					</g>
 				</g>
 			</g>
 		</svg>
@@ -83,6 +94,10 @@ export default {
 			const radius = this.chartRadius * (completedLevels / this.maxDataValue);
 			return this.getCoordinate(radius, index, this.perspectives.length);
 		},
+		getCoordinateForCircleGoal(perspective, index) {
+			const radius = this.chartRadius * (perspective.goalLevel / this.maxDataValue);
+			return this.getCoordinate(radius, index, this.perspectives.length);
+		},
 		getCoordinate(radius, index, total) {
 			const angle = (Math.PI * 2 * index) / total - Math.PI / 2;
 			const x = radius * Math.cos(angle);
@@ -90,13 +105,26 @@ export default {
 			return [x, y];
 		},
 		getPolygonPoints(perspectives) {
-			return perspectives
+			var perspectiveArray = perspectives
 			.map((perspective, index) => {
 				const completedLevels = perspective.levels.filter(level => level.isCompleted).length;
 				const radius = this.chartRadius * (completedLevels / this.maxDataValue);
 				return this.getCoordinate(radius, index, perspectives.length).join(',');
 			})
 			.join(' ');
+
+			return perspectiveArray
+			
+		},
+		getPolygonPointsGoal(perspectives) {
+			var perspectiveArray = perspectives
+			.map((perspective, index) => {
+				const radius = this.chartRadius * (perspective.goalLevel / this.maxDataValue);
+				return this.getCoordinate(radius, index, perspectives.length).join(',');
+			})
+			.join(' ');
+
+			return perspectiveArray
 		},
 		checkAllLevelsCompletion(perspective) {
 			perspective.isCompleted = perspective.levels.every((level) => level.isCompleted);

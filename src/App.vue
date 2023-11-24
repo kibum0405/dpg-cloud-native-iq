@@ -7,7 +7,7 @@
 					src="./image/DPG_logo.png" 
 				/>
 			</v-app-bar>
-			<v-main style="padding:20px;">
+			<v-main style="padding:20px; height: calc(100vh - 60px);">
 				<router-view></router-view>
 			</v-main>
 		</div>
@@ -36,5 +36,6 @@ export default {
 </script>
 
 <style>
+
 </style>
 

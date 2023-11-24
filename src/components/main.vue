@@ -1,8 +1,9 @@
 <template>
-	<div>
+	<div style="width:100%;height: 100%;">
 		<div class="flex-column">
 			<div style="text-align: center;">
-				<img style="height:500px; width:800px;" src="../image/DPG_logo.png" />
+				<!-- <img style="width:800px; height:500px;" src="../image/DPG_logo.png" /> -->
+				<img style="height: calc(50vh - 36px);" src="../image/DPG_logo.png" />
 			</div>
 			<v-row>
 				<v-col v-for="(step, index) in steps" :key="index">

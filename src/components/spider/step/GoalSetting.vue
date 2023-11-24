@@ -39,23 +39,18 @@
 
 <script>
 import SpiderChart from './SpiderChart.vue'
+import AssessmentData from './AssessmentData';
 
 export default {
     name: "GoalSetting",
+    mixins: [
+        AssessmentData
+    ],
     components: {
         SpiderChart
     },
     data () {
         return {
-            perspectives: [],
-            chartWidth: 400,
-            chartHeight: 400,
-            chartCenterX: 200,
-            chartCenterY: 200,
-            chartRadius: 150,
-            labelOffset: 20,
-            maxDataValue: 5,
-            pointRadius: 4,
             tickLabels: [
                 '전혀 그렇지 않다.',
                 '그렇지 않다.',

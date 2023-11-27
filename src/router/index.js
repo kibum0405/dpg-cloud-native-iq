@@ -2,7 +2,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import main from '../components/main.vue';
-import Step from '../components/spider/step/Step.vue'
+import User from '../components/spider/User.vue'
 
 Vue.use(VueRouter);
 
@@ -13,9 +13,9 @@ const routes = [
         component: main,
   },
   {
-        path: '/step',
-        name: 'Step',
-        component: Step,
+        path: '/user',
+        name: 'User',
+        component: User,
   },
 ];
 

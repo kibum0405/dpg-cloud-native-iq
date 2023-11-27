@@ -105,18 +105,23 @@ export default {
 			return [x, y];
 		},
 		getPolygonPoints(perspectives) {
+			if (!perspectives || perspectives.length === 0) {
+				return '';
+			}
 			var perspectiveArray = perspectives
-			.map((perspective, index) => {
-				const completedLevels = perspective.levels.filter(level => level.isCompleted).length;
-				const radius = this.chartRadius * (completedLevels / this.maxDataValue);
-				return this.getCoordinate(radius, index, perspectives.length).join(',');
-			})
-			.join(' ');
+				.map((perspective, index) => {
+					const completedLevels = perspective.levels.filter(level => level.isCompleted).length;
+					const radius = this.chartRadius * (completedLevels / this.maxDataValue);
+					return this.getCoordinate(radius, index, perspectives.length).join(',');
+				})
+				.join(' ');
 
-			return perspectiveArray
-			
+			return perspectiveArray;
 		},
 		getPolygonPointsGoal(perspectives) {
+			if (!perspectives || perspectives.length === 0) {
+				return '';
+			}
 			var perspectiveArray = perspectives
 			.map((perspective, index) => {
 				const radius = this.chartRadius * (perspective.goalLevel / this.maxDataValue);

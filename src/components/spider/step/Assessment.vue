@@ -2,8 +2,8 @@
 	<div>
 		<v-row>
 			<v-col>
-				<div class="qna-box assess-box">
-					<div v-for="(perspective, index) in perspectives" :key="index" style="margin-bottom: 40px;">
+				<div class="qna-box assess-box" >
+					<div v-for="(perspective, index) in selectedUser.perspectives" :key="index" style="margin-bottom: 40px;">
 						<h2 style="margin-bottom: 20px;">{{ perspective.name }}</h2>
 						<div v-for="(level, levelIndex) in perspective.levels" :key="levelIndex">
 							<h3 style="margin-bottom: 10px;">Level {{ levelIndex + 1 }}</h3>
@@ -28,7 +28,7 @@
 			</v-col>
 			<v-col>
 				<SpiderChart
-					:perspectives="perspectives"
+					:perspectives="selectedUser.perspectives"
 					:chartWidth="chartWidth"
 					:chartHeight="chartHeight"
 					:chartCenterX="chartCenterX"
@@ -55,34 +55,20 @@ export default {
         SpiderChart,
     },
     props: {
-
+        selectedUser: [],
     },
 	data() {
         return {
-            
         }
 	},
 	mounted() {
-		this.getPerspectives();
 	},
 	watch: {
-        perspectives: {
-			handler(newVal) {
-				localStorage.setItem('perspectives', JSON.stringify(newVal));
-				this.$bus.$emit('perspectivesUpdated', newVal);
-			},
-			deep: true
-		}
     },
 	methods: {
-		getPerspectives() {
-            const storedPerspectives = localStorage.getItem('perspectives');
-            if (storedPerspectives) {
-                this.perspectives = JSON.parse(storedPerspectives);
-            }
-        },
 		updateLevelCompletion(perspective, level) {
 			level.isCompleted = level.checkpoints.every(checkpoint => checkpoint.checked);
+			this.$emit('saveUsers')
 		},
 	}
 };

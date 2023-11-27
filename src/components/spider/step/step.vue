@@ -1,6 +1,5 @@
 <template>
     <div>
-        <User />
         <v-stepper v-model="e1" class="box-wrap">
             <v-stepper-header>
                 <template v-for="n in components.length">
@@ -30,7 +29,7 @@
                     :step="n"
                 >
                     <v-card class="mb-12 stop-box-in">
-                        <component :is="components[n - 1].component" />
+                        <component @saveUsers="saveUsers" :selectedUser="selectedUser" :is="components[n - 1].component" />
                     </v-card>
                     
                 </v-stepper-content>
@@ -47,11 +46,12 @@
 import Assessment from './Assessment';
 import GoalSetting from './GoalSetting';
 import GetTheGuide from './GetTheGuide';
-import User from './User.vue'
 
 export default {
     components: {
-        User
+    },
+    props: {
+        selectedUser: null,
     },
     data () {
         return {
@@ -68,6 +68,9 @@ export default {
     },
 
     methods: {
+        saveUsers(){
+            this.$emit('saveUsers')
+        },
         nextStep (n) {
             if (n === this.components.length) {
                 this.e1 = 1

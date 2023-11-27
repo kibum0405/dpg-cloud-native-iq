@@ -1,5 +1,6 @@
 <template>
     <div>
+        <User />
         <v-stepper v-model="e1" class="box-wrap">
             <v-stepper-header>
                 <template v-for="n in components.length">
@@ -46,8 +47,12 @@
 import Assessment from './Assessment';
 import GoalSetting from './GoalSetting';
 import GetTheGuide from './GetTheGuide';
+import User from './User.vue'
 
 export default {
+    components: {
+        User
+    },
     data () {
         return {
             e1: 1,

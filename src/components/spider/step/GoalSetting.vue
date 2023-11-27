@@ -62,7 +62,7 @@ export default {
             topics: [
                 {
                     name: 'Availability',
-                    goalLevels:[3, 3, 0, 3, 3],
+                    goalLevels:[3, 3, 0, 3, 3, 0],
                     goalCheckCount: 3,
                     questions: [
                         {
@@ -93,7 +93,7 @@ export default {
                 },
                 {
                     name: '업무 간섭 / 이해의 문제',
-                    goalLevels:[3, 3, 0, 3, 3],
+                    goalLevels:[3, 3, 0, 3, 3, 0],
                     goalCheckCount: 3,
                     questions: [
                         {
@@ -136,8 +136,8 @@ export default {
                 },
                 {
                     name: 'Agility',
-                    goalLevels:[3, 3, 0, 3, 3],
-                    goalCheckCount: 3,
+                    goalLevels:[1, 2, 3, 4, 3, 4],
+                    goalCheckCount: 1,
                     questions: [
                         {
                             text: '신규 업무를 개발하여 배포하는데 타 서비스들간의 테스트를 위하여 대기해야하는 시간이 얼마나 걸리는가 (코드 머지, 통합 테스트, 간섭에 의한 오류 수정)',
@@ -147,7 +147,7 @@ export default {
                 },
                 {
                     name: '다양한 최신기술 수용성',
-                    goalLevels:[3, 3, 0, 3, 3],
+                    goalLevels:[1, 2, 3, 4, 3, 4],
                     goalCheckCount: 1,
                     questions: [
                         {
@@ -162,7 +162,7 @@ export default {
                 },
                 {
                     name: '성능',
-                    goalLevels:[2, 2, 2, 2, 1],
+                    goalLevels:[1, 2, 3, 4, 3, 4],
                     goalCheckCount: 1,
                     questions: [
                         {
@@ -177,7 +177,7 @@ export default {
                 },
                 {
                     name: '관리자동화/효율화',
-                    goalLevels:[4, 4, 4, 4, 4],
+                    goalLevels:[4, 4, 4, 4, 4, 4],
                     goalCheckCount: 2,
                     questions: [
                         {
@@ -200,7 +200,7 @@ export default {
                 },
                 {
                     name: '데이터 분석 및 혁신',
-                    goalLevels:[1, 2, 1, 4, 3],
+                    goalLevels:[3, 2, 3, 4, 3, 4],
                     goalCheckCount: 1,
                     questions: [
                         {
@@ -215,7 +215,7 @@ export default {
                 },
                 {
                     name: '지속적 혁신',
-                    goalLevels:[0, 0, 2, 1, 4],
+                    goalLevels:[3, 2, 3, 4, 3, 4],
                     goalCheckCount: 1,
                     questions: [
                         {
@@ -253,7 +253,10 @@ export default {
         },
         changeGoalLevel() {
             var me = this
-            var goalLevelResult = [0, 0, 0, 0, 0]
+            var goalLevelResult = []
+            me.perspectives.forEach(function (){
+                goalLevelResult.push(0)
+            });
             this.topics.forEach(function (topic, index) {
                 const count = topic.questions.filter(q => q.value >= 3).length;
                 if (count < topic.goalCheckCount) return

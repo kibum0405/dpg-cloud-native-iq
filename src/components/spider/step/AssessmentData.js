@@ -199,6 +199,7 @@ export default {
 				},
 				{
 					name: '팀 구조와 문화 관점',
+					goalLevel: 0,
 					levels: [
 						{
 							checkpoints: [

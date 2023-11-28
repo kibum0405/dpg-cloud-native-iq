@@ -12,7 +12,7 @@
         </v-tab>
         </v-tabs>
 
-        <v-tabs-items v-model="tab">
+        <v-tabs-items v-model="tab" style="overflow:auto;">
             <v-tab-item
                 v-for="item in items"
                 :key="item.tab"

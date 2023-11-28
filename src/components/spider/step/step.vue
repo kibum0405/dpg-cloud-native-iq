@@ -36,8 +36,8 @@
             </v-stepper-items>
         </v-stepper>
         <div class="btn-box">
-            <v-btn class="btn-1" color="primary" @click="nextStep(n)">Next</v-btn>
-            <v-btn class="btn-1" text>Cancel</v-btn>
+            <v-btn class="btn-bot" color="primary" @click="nextStep(n)">Next</v-btn>
+            <v-btn class="btn-bot" text>Cancel</v-btn>
         </div>
     </div>
 </template>
@@ -84,28 +84,28 @@ export default {
 
 <style>
 .box-wrap {
-    height:calc(100vh - 150px);
+    height:calc(100vh - 220px);
     /* border:1px solid blue; */
 }
 .step-box {
     /* overflow: auto; */
-    height:calc(100vh - 230px);
+    height:calc(100vh - 220px);
     /* background-color: lightgoldenrodyellow; */
 }
 .stop-box-in { 
     /* step-box 안의 흰 박스 */
-    height:calc(100vh - 280px);
+    height:calc(100vh - 300px);
 }
 .qna-box {
     /* width: 130%; */
-    height:calc(100vh - 280px);
+    height:calc(100vh - 335px);
 	overflow: auto;
     padding: 20px;
 	/* border: 1px solid pink; */
 }
 .btn-box {
     text-align: right;
-    margin-top:10px;
+    margin-top: 10px;
 }
 
 @media only screen and (max-width:1100px) {
@@ -121,7 +121,7 @@ export default {
         height: 50vh;
         padding: 0;
     }
-    .btn-1 {
+    .btn-bot {
         margin-bottom:10px;
     }
 }

@@ -21,7 +21,7 @@
                     <template v-for="content in item.content">
                         <v-card-text>{{ content.text }}</v-card-text>
                     </template>
-                    <GetTheGuideMd />
+                    <GetTheGuideMd :selectedUser="selectedUser" />
                 </v-card>
             </v-tab-item>
         </v-tabs-items>
@@ -35,6 +35,9 @@ export default {
     name: "GetTheGuide",
     components: {
         GetTheGuideMd
+    },
+    props: {
+        selectedUser: null
     },
     data () {
         return {

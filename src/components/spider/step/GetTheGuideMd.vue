@@ -16,9 +16,13 @@ import marked from 'marked';
 
 export default {
     name: 'GetTheGuideMd',
+    props: {
+        selectedUser: null,
+    },
     data() {
         return {
             folders: [], // 폴더 목록 및 각 폴더의 파일 목록
+            userPerspectives: [], // 사용자의 perspectives
         };
     },
     methods: {
@@ -27,7 +31,9 @@ export default {
                 const response = await axios.get(`https://api.github.com/repos/msa-ez/cloud-iq/contents/get-the-guide-md`);
                 const folders = response.data.filter(item => item.type === 'dir');
                 for (const folder of folders) {
-                    await this.getFolderContents(folder.name);
+                    if (this.userPerspectives.includes(folder.name)) {
+                        await this.getFolderContents(folder.name);
+                    }
                 }
             } catch (error) {
                 console.error("Failed to load folders", error);
@@ -45,9 +51,17 @@ export default {
             } catch (error) {
                 console.error(`Failed to load contents for folder ${folderName}`, error);
             }
+        },
+        loadUserPerspectives() {
+            const registeredUsers = JSON.parse(localStorage.getItem('registeredUsers'));
+            if (registeredUsers && registeredUsers.length > 0) {
+                // 예시로 첫 번째 사용자의 perspectives를 사용합니다.
+                this.userPerspectives = registeredUsers[0].perspectives.map(p => p.name_en);
+            }
         }
     },
     mounted() {
+        this.loadUserPerspectives();
         this.getAllFolders();
     }
 };

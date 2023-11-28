@@ -21,7 +21,9 @@
                     <template v-for="content in item.content">
                         <v-card-text>{{ content.text }}</v-card-text>
                     </template>
-                    <div v-if="goalLevels[item.tab_en]" v-html="markdownContentFolders[item.tab_en][goalLevels[item.tab_en]]"></div>
+                    <div v-if="goalLevels[item.tab_en] > 0 && Object.keys(markdownContentFolders).length > 0"
+                        v-html="markdownContentFolders[item.tab_en][goalLevels[item.tab_en]]"
+                    ></div>
                 </v-card>
             </v-tab-item>
         </v-tabs-items>
@@ -142,19 +144,20 @@ export default {
                 ]
             },
         ],
+        tab: 0,
         markdownContentFolders: {},
-        tab: null,
         userPerspectives: [],
         goalLevels: {},
         contents: [],
       }
     },
-    mounted() {
+    created() {
         this.loadUserPerspectives();
     },
     watch: {
         selectedUser:{
             handler(){
+                this.markdownContentFolders = {}
                 this.loadUserPerspectives();
             },
             deep:true
@@ -168,6 +171,7 @@ export default {
                 for (const folder of markdownContentFolders) {
                     await this.getFolderContents(folder.name);
                 }
+                this.$forceUpdate()
             } catch (error) {
                 console.error("Failed to load markdownContentFolders", error);
             }

@@ -21,6 +21,7 @@
                     <template v-for="content in item.content">
                         <v-card-text>{{ content.text }}</v-card-text>
                     </template>
+                    <GetTheGuideMd />
                 </v-card>
             </v-tab-item>
         </v-tabs-items>
@@ -28,10 +29,12 @@
 </template>
 
 <script>
+import GetTheGuideMd from './GetTheGuideMd.vue'
 
 export default {
     name: "GetTheGuide",
-    comments: {
+    components: {
+        GetTheGuideMd
     },
     data () {
         return {

@@ -7,16 +7,16 @@ import User from '../components/spider/User.vue'
 Vue.use(VueRouter);
 
 const routes = [
-  {
-        path: '/',
-        name: 'main',
-        component: main,
-  },
-  {
-        path: '/user',
-        name: 'User',
-        component: User,
-  },
+      {
+            path: '/',
+            name: 'main',
+            component: main,
+      },
+      {
+            path: '/user',
+            name: 'User',
+            component: User,
+      },
 ];
 
 const router = new VueRouter({
